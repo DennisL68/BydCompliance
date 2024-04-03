@@ -39,7 +39,7 @@
 
     $BcdStore = Get-StaticBcdStore | Create-Store -File $bcdFile
     $BcdStore | Import-Store "$env:TEMP\BCD-TEMP" | Out-Null
-    
+
     The output from bcdedit for a live system store is used to generate a new BCD store in code. The resulting BCD
     store is created on a drive that has been cleaned, reformatted, and reimaged in a deployment scenario.
 
@@ -77,7 +77,7 @@ function Get-DosDevice {
 
 function Has-Role {
     Param(
-        [Security.Principal.WindowsBuiltInRole]$Role = 
+        [Security.Principal.WindowsBuiltInRole]$Role =
           [Security.Principal.WindowsBuiltInRole]::Administrator
     )
     
@@ -98,7 +98,7 @@ function Set-InheritedObjects {
     Param(
         [Parameter(Position=0)]
         $Value,
-        
+
         [Parameter(ValueFromPipeLine=$true)]
         $BcdObject
     )
@@ -122,7 +122,7 @@ function Set-Description {
     Param(
         [Parameter(Position=0)][string]
         $Value,
-        
+
         [Parameter(ValueFromPipeLine=$true)]
         $BcdObject
     )
@@ -134,7 +134,7 @@ function Set-PreferredLocale {
     Param(
         [Parameter(Position=0)][string]
         $Value,
-        
+
         [Parameter(ValueFromPipeLine=$true)]
         $BcdObject
     )
@@ -150,7 +150,7 @@ function New-InParameter {
     Param(
         [Parameter(Position=0)]
         $Method,
-        
+
         [Parameter(ValueFromPipeLine=$true)]
         $Object
     )
@@ -162,7 +162,7 @@ function Get-PropertyValue {
     Param(
         [Parameter(Position=0)]
         $Property,
-        
+
         [Parameter(ValueFromPipeLine=$true)]
         $Object
     )
@@ -192,7 +192,7 @@ function Invoke-Method {
 
         [Parameter(Position=1)]
         $ParameterNames,
-        
+
         [Parameter(Position=2)]
         $ParameterValues,
 
@@ -798,7 +798,7 @@ function Set-IntegerElement {
     $BcdObject | Invoke-Method "SetIntegerElement" "Type",
     "Integer" $Type,$Integer | Get-PropertyValue "ReturnValue"
 }
-    
+
 function Set-IntegerListElement {
     Param (
         [Parameter(Position=0)][uint32]

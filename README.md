@@ -1,11 +1,11 @@
-# EnterpriseCompliance
+# BydCompliance
 
 ## 1. Description
 
-EnterpriseCompliance is a Pester v4 test that will show if your development rig is compliant with the 
+BydCompliance is a Pester v4 test that will show if your development rig is compliant with the 
 corporation policies where you are working.
 
-Simply enter the values provided by the IT Security department (if they let you know) in the settings file (feature not done yet) and run the test.
+Simply enter the values provided by the IT Security department (if they let you know) in the configuration file and run the test.
 
 ## 2. Requirements
 
@@ -24,9 +24,9 @@ The script can only test what the Pester script is handling. Feel free to add ad
 
 ## 4. How do I use this repo?
 
-* `Install-Module EnterpriseCompliance` (not released to PS Gallery yet)
+* `Install-Module BydCompliance` (not released to PS Gallery yet)
 * Install the prerequisites.
-* Create the settings json file compliance.json in your `~`-folder. (future version)
+* Create the settings json file compliance.json in your `~`-folder.
 * `Invoke-Pester ...` as administrator.
 
 ## 5. References and links

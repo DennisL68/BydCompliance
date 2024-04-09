@@ -1,12 +1,51 @@
-﻿#TODO Add Power & Sleep detection
+
+<#PSScriptInfo
+
+.VERSION 1.0.0
+
+.GUID 767e666d-2edb-4f2d-83e1-c116be8d45e4
+
+.AUTHOR DennisL68
+
+.COMPANYNAME
+
+.COPYRIGHT
+
+.TAGS
+
+.LICENSEURI
+
+.PROJECTURI https://github.com/DennisL68/BydCompliance
+
+.ICONURI
+
+.RELEASENOTES
+
+
+#>
+
+#Requires -Module PSWindowsUpdate
+#Requires -Module @{ModuleName = 'Pester'; ModuleVersion = '4.10.1'}
+#Requires -Module PendingReboot
+#Requires -Module SpeculationControl
+
+<#
+
+.DESCRIPTION
+ A Pester v4 test for checking BYD corporate compliance that uses a config file for all parameters to check for. 
+
+#>
+
+Param()
+
+
+#TODO Add Power & Sleep detection
 #TODO Add Privacy checks
 #TODO WiFi Settings?
 #TODO Check Tamper settings in 1903 and above
 #TODO Smart Screen
 #? Do we need to check Windows Defender preferences as well
 #TODO Internet security settings
-
-#Requires -Modules PSWindowsUpdate,@{ModuleName='Pester';ModuleVersion='4.10.1'},PendingReboot,SpeculationControl
 
 #region functions
 function ConvertFrom-IniFile ($file) {

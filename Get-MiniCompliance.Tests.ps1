@@ -1,7 +1,7 @@
 
 <#PSScriptInfo
 
-.VERSION 1.0.0
+.VERSION 1.1.0
 
 .GUID 767e666d-2edb-4f2d-83e1-c116be8d45e4
 
@@ -201,10 +201,15 @@ function Check {# configs of $true, $null, $false and value
 
 $IsAdmin = [bool](([System.Security.Principal.WindowsIdentity]::GetCurrent()).groups -match 'S-1-5-32-544')
 
-$Compliance = Get-Content $PSScriptRoot\compliance.json | ConvertFrom-Json
+$Compliance = Get-Content $PSScriptRoot\compliance.json -ErrorAction SilentlyContinue | ConvertFrom-Json
 
 if (Test-Path ~\compliance.json) {
     $Compliance = Get-Content ~\compliance.json | ConvertFrom-Json
+}
+
+if (!$Compliance) {
+    Write-Error 'The settings file compliance.json is missing. See the GitHub project for more information.'
+    return
 }
 
 $ComplianceTypes =  $Compliance |

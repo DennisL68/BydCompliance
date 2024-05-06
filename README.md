@@ -26,8 +26,8 @@ The script can only test what the Pester script is handling. Feel free to add ad
 
 * `Install-Module BydCompliance` (not released to PS Gallery yet)
 * Install the prerequisites.
-* Create the settings json file compliance.json in your `~`-folder.
-* `Invoke-Pester ...` as administrator.
+* Copy the settings json file `compliance.json` from the GitHub project to your `~`-folder and edit it to your likings.
+* `Invoke-Pester .\Get-MiniCompliance.Tests.ps1` as administrator.
 
 ## 5. References and links
 

@@ -227,7 +227,7 @@ Describe '- Check Windows environment Compliance'  -Tag Environment {
 
             It 'Should check End of Life' {
 
-                    $WindowsInfo = Get-Item "HKLM:SOFTWARE\Microsoft\Windows NT\CurrentVersion" | select @{
+                    $WindowsInfo = Get-Item 'HKLM:SOFTWARE\Microsoft\Windows NT\CurrentVersion' | select @{
                             l = 'OsName'
                             e = {$_.GetValue("ProductName")}
                     },
@@ -238,9 +238,9 @@ Describe '- Check Windows environment Compliance'  -Tag Environment {
                     @{
                         l = 'Version'
                         e = {
-                            if ($_.GetValue("ReleaseId")) {$_.GetValue("ReleaseID")}
-                            if ($_.GetValue("DisplayVersion")) {$_.GetValue("DisplayVersion")}
-                            if (! ($_.GetValue("ReleaseId") -or $_.GetValue("DisplayVersion")) ) {$_.GetValue("CurrentVersion")}
+                            if ( $_.GetValue('ReleaseId') -and !($_.GetValue('DisplayVersion')) ) {$_.GetValue('ReleaseID')}
+                            if ( $_.GetValue('DisplayVersion') ) {$_.GetValue('DisplayVersion')}
+                            if ( ! ($_.GetValue('ReleaseId') -or $_.GetValue('DisplayVersion')) ) {$_.GetValue('CurrentVersion')}
                         }
                     }
 

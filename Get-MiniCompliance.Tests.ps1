@@ -32,7 +32,7 @@
 <#
 
 .DESCRIPTION
- A Pester v4 test for checking BYD corporate compliance that uses a config file for all parameters to check for. 
+ A Pester v4 test for checking BYD corporate compliance that uses a config file for all parameters to check for.
 
 #>
 

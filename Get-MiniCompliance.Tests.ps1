@@ -209,7 +209,7 @@ if (Test-Path ~\compliance.json) {
 
 $ComplianceTypes =  $Compliance |
     Get-Member -MemberType Property,NoteProperty |
-        select -ExpandProperty Name
+        select -ExpandProperty Name | where {$_ -ne 'ProjectReference'}
 
 foreach ($ComplianceType in $ComplianceTypes) {# State what compliance is not defined to be checked
     if ([string]::IsNullOrEmpty($Compliance.$ComplianceType.Active)) {

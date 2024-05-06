@@ -591,56 +591,116 @@ Describe '- Check Security Compliance' -Tag Security {
     if ($Compliance.WindowsDefender.Active) {
         Context '- Get Windows Defender status' {
 
-            $MpStatus = Get-MpComputerStatus
+            $AntiVirusProduct = Get-CimInstance -Namespace root\SecurityCenter2 -ClassName AntivirusProduct
+
+            [boolean]$WindowsDefenderIsRunning = (Get-Service WinDefend).Status -eq 'Running'
+
+            It 'Should have Windows Defender running' {# as built-in PowerShell only handles Windows Defender
+                $WindowsDefenderIsRunning | Should -BeTrue # Should compare with ProductState but that lacks docs
+            }
+
+            if ($WindowsDefenderIsRunning) {
+                $MpStatus = Get-MpComputerStatus
+            }
 
             It 'Should check AntiMalware status' {
-                Check -If $MpStatus.AMServiceEnabled `
-                    -IsCompliantWith $Compliance.WindowsDefender.Settings.AntiMalwareIsActive
+                if ($WindowsDefenderIsRunning) {
+                    Check -If $MpStatus.AMServiceEnabled `
+                        -IsCompliantWith $Compliance.WindowsDefender.Settings.AntiMalwareIsActive
+                }
+                if (!$WindowsDefenderIsRunning) {
+                    Set-ItResult -Skipped -Because 'Windows Defender is not running'
+                }
             }
 
             It 'Should check AntiSpyware status' {
-                Check -If $MpStatus.AntispywareEnabled `
-                    -IsCompliantWith $Compliance.WindowsDefender.Settings.AntiSpywareIsActive
+                if ($WindowsDefenderIsRunning) {
+                    Check -If $MpStatus.AntispywareEnabled `
+                        -IsCompliantWith $Compliance.WindowsDefender.Settings.AntiSpywareIsActive
+                }
+                if (!$WindowsDefenderIsRunning) {
+                    Set-ItResult -Skipped -Because 'Windows Defender is not running'
+                }
             }
 
             It 'Should check current AntiSpyware signature age' {
-                Check -If $MpStatus.AntispywareSignatureAge `
-                    -IsLessOrEqualTo $Compliance.WindowsDefender.Settings.AntiSpywareSignatureMaxAge
+                if ($WindowsDefenderIsRunning) {
+                    Check -If $MpStatus.AntispywareSignatureAge `
+                        -IsLessOrEqualTo $Compliance.WindowsDefender.Settings.AntiSpywareSignatureMaxAge
+                }
+                if (!$WindowsDefenderIsRunning) {
+                    Set-ItResult -Skipped -Because 'Windows Defender is not running'
+                }
             }
 
             It 'Should check AnitVirus status' {
-                Check -If $MpStatus.AntivirusEnabled `
-                    -IsCompliantWith $Compliance.WindowsDefender.Settings.AntiVirusIsActive
+                if ($WindowsDefenderIsRunning) {
+                    Check -If $MpStatus.AntivirusEnabled `
+                        -IsCompliantWith $Compliance.WindowsDefender.Settings.AntiVirusIsActive
+                }
+                if (!$WindowsDefenderIsRunning) {
+                    Set-ItResult -Skipped -Because 'Windows Defender is not running'
+                }
             }
 
             It 'Shoud check current AntiVirusSignature age' {
-                Check -If $MpStatus.AntivirusSignatureAge `
-                    -IsLessOrEqualTo $Compliance.WindowsDefender.Settings.AntiVirusSignatureMaxAge
+                if ($WindowsDefenderIsRunning) {
+                    Check -If $MpStatus.AntivirusSignatureAge `
+                        -IsLessOrEqualTo $Compliance.WindowsDefender.Settings.AntiVirusSignatureMaxAge
+                }
+                if (!$WindowsDefenderIsRunning) {
+                    Set-ItResult -Skipped -Because 'Windows Defender is not running'
+                }
             }
 
             It 'Should check Behavior monitoring status' {
-                Check -If $MpStatus.BehaviorMonitorEnabled `
-                    -IsCompliantWith $Compliance.WindowsDefender.Settings.BehaviorMonitoringIsActive
+                if ($WindowsDefenderIsRunning) {
+                    Check -If $MpStatus.BehaviorMonitorEnabled `
+                        -IsCompliantWith $Compliance.WindowsDefender.Settings.BehaviorMonitoringIsActive
+                }
+                if (!$WindowsDefenderIsRunning) {
+                    Set-ItResult -Skipped -Because 'Windows Defender is not running'
+                }
             }
 
             It 'Should check fully scanned timeframe' {
-                Check -If $MpStatus.FullScanAge `
+                if ($WindowsDefenderIsRunning) {
+                    Check -If $MpStatus.FullScanAge `
                     -IsLessOrEqualTo $Compliance.WindowsDefender.Settings.LastFullScanMaxAge
+                }
+                if (!$WindowsDefenderIsRunning) {
+                    Set-ItResult -Skipped -Because 'Windows Defender is not running'
+                }
             }
 
             It 'Should check quicked scanned timeframe' {
-                Check -If $MpStatus.QuickScanAge `
-                    -IsLessOrEqualTo $Compliance.WindowsDefender.Settings.LastQuickScanMaxAge
+                if ($WindowsDefenderIsRunning) {
+                    Check -If $MpStatus.QuickScanAge `
+                        -IsLessOrEqualTo $Compliance.WindowsDefender.Settings.LastQuickScanMaxAge
+                }
+                if (!$WindowsDefenderIsRunning) {
+                    Set-ItResult -Skipped -Because 'Windows Defender is not running'
+                }
             }
 
             It 'Should check Realtime Protection status' {
-                Check -If $MpStatus.RealTimeProtectionEnabled `
-                    -IsCompliantWith $Compliance.WindowsDefender.Settings.RealTimeProtectionIsActive
+                if ($WindowsDefenderIsRunning) {
+                    Check -If $MpStatus.RealTimeProtectionEnabled `
+                        -IsCompliantWith $Compliance.WindowsDefender.Settings.RealTimeProtectionIsActive
+                }
+                if (!$WindowsDefenderIsRunning) {
+                    Set-ItResult -Skipped -Because 'Windows Defender is not running'
+                }
             }
 
             It 'Should check Tamper Protection status' {
-                Check -If $MpStatus.IsTamperProtected `
-                    -IsCompliantWith $Compliance.WindowsDefender.Settings.TamperProtectionIsActive
+                if ($WindowsDefenderIsRunning) {
+                    Check -If $MpStatus.IsTamperProtected `
+                        -IsCompliantWith $Compliance.WindowsDefender.Settings.TamperProtectionIsActive
+                }
+                if (!$WindowsDefenderIsRunning) {
+                    Set-ItResult -Skipped -Because 'Windows Defender is not running'
+                }
             }
         }# end context Windows Defender
     }

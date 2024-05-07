@@ -2,7 +2,7 @@
 
 ## 1. Description
 
-BydCompliance is a Pester v4 test that will show if your development rig is compliant with the 
+[BydCompliance](https://github.com/DennisL68/BydCompliance) is a Pester v4 test that will show if your development rig is compliant with the 
 corporation policies where you are working.
 
 Simply enter the values provided by the IT Security department (if they let you know) in the configuration file and run the test.
@@ -26,8 +26,9 @@ The script can only test what the Pester script is handling. Feel free to add ad
 
 * `Install-Module BydCompliance` (not released to PS Gallery yet)
 * Install the prerequisites.
-* Create the settings json file compliance.json in your `~`-folder.
-* `Invoke-Pester ...` as administrator.
+* Copy the settings json file `compliance.json` from the GitHub project to your `~`-folder and choose what test you 
+  would liking using `true` or `false`.
+* `Invoke-Pester .\Get-MiniCompliance.Tests.ps1` as administrator.
 
 ## 5. References and links
 

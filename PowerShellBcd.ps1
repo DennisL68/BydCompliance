@@ -80,7 +80,7 @@ function Has-Role {
         [Security.Principal.WindowsBuiltInRole]$Role =
           [Security.Principal.WindowsBuiltInRole]::Administrator
     )
-    
+
     $identity = [Security.Principal.WindowsIdentity]::GetCurrent()
     $principal = New-Object Security.Principal.WindowsPrincipal $identity
 
@@ -821,7 +821,7 @@ function Set-BooleanElement {
         $Type,
 
         [Parameter(Position=1)][bool]
-        $Boolean, 
+        $Boolean,
 
         [Parameter(ValueFromPipeLine=$true)]
         $BcdObject
@@ -861,7 +861,7 @@ function Delete-Element {
 function Open-Store {
     Param (
         [Parameter(Position=0)][string]
-        $File="", 
+        $File="",
 
         [Parameter(Mandatory=$true, ValueFromPipeLine=$true)]
         $BcdStore
@@ -943,7 +943,7 @@ function Get-SystemPartition {
         $BcdStore
     )
 
-    $BcdStore | Invoke-Method 
+    $BcdStore | Invoke-Method
     "GetSystemPartition" | Get-PropertyValue "Partition"
 }
 
@@ -956,7 +956,7 @@ function Set-SystemStoreDevice {
         $BcdStore
     )
 
-    $BcdStore | Invoke-Method 
+    $BcdStore | Invoke-Method
     "SetSystemStoreDevice" | Get-PropertyValue "ReturnValue"
 }
 

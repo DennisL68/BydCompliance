@@ -638,7 +638,7 @@ Describe '- Check Security Compliance' -Tag Security {
                 }
             }
 
-            It 'Should check AnitVirus status' {
+            It 'Should check AntiVirus status' {
                 if ($WindowsDefenderIsRunning) {
                     Check -If $MpStatus.AntivirusEnabled `
                         -IsCompliantWith $Compliance.WindowsDefender.Settings.AntiVirusIsActive

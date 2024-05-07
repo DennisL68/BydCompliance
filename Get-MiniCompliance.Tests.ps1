@@ -256,9 +256,9 @@ Describe '- Check Windows environment Compliance'  -Tag Environment {
 
                     $Today = Get-Date
 
-                    if ($Compliance.WindowsEoL.Settings.Extended) {
-                        $EndDate = [datetime]($Compliance.WindowsEoL.EndDates.$Windows[1..3] | Measure-Object -Maximum).Maximum
-                    } else {
+                    if ($Compliance.WindowsEoL.Settings.Extended) {# Extended End date exists, use that
+                        $EndDate = [datetime]($Compliance.WindowsEoL.EndDates.$Windows[1..2] | Measure-Object -Maximum).Maximum
+                    } else {# Use normal End Date
                         $EndDate = [datetime]$Compliance.WindowsEoL.EndDates.$Windows[1]
                     }
 
